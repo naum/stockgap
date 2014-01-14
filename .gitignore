@@ -1,0 +1,8 @@
+*.swp
+.DS_Store
+packages
+*.lock
+*.dart.js
+*.precompiled.js
+*.js.deps
+*.js.map
