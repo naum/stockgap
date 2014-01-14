@@ -4,6 +4,6 @@ import 'package:stockgap/stockgap.dart' as cgi;
 
 main() {
   cgi.kickoff();
-  print(cgi.render('<h1>stockgap</h1><p>${cgi.env}</p>'));
+  print(cgi.render('<h1>stockgap</h1><p>${cgi.param}<p>${cgi.env}</p>'));
 }
 

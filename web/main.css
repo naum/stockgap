@@ -6,3 +6,9 @@ body {
   line-height: 1.333em;
 }
 
+#pagewrapper {
+  max-width: 30em;
+  width: 30em;
+  margin: 2.77% auto;
+}
+
