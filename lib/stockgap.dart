@@ -3,7 +3,9 @@ library stockgap;
 import 'dart:io';
 
 var cookies = {};
+var cookieOut = [];
 var env = {};
+var headers = [];
 var param = {};
 var queryStr;
 var reqMeth;
@@ -38,11 +40,37 @@ kickoff() {
   if (reqMeth == 'POST') {
     _parseParams(_grabStdin());
   }
+  cookieOut.add({
+    'name': 'the_answer',
+    'value': 'forty two'
+  });
+  cookieOut.add({
+    'name': 'secret identity',
+    'value': 'WTF'
+  });
+}
+
+String prepareCookieDelivery() {
+  var cookieParts = [];
+  for (var c in cookieOut) {
+    var cn = Uri.encodeComponent(c['name']);
+    var cv = Uri.encodeComponent(c['value']);
+    cookieParts.add('${cn}=${cv}');
+  }
+  var cookieStr = cookieParts.join('&');
+  return('Set-Cookie: ${cookieStr};');
 }
 
 String render(String p) {
-  var tout = 'Content-type:text/html\n\n${p}';
-  return tout;
+  setHeaders();
+  return '${headers.join("\n")}\n\n${p}';
+}
+
+String setHeaders() {
+  headers.add('Content-type:text/html');
+  if (cookieOut.isNotEmpty){
+    headers.add(prepareCookieDelivery());
+  }
 }
 
 String template(String tstr, Map vbind) {
